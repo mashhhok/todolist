@@ -8,6 +8,8 @@ body {
 }
 
 .container {
+	display: flex;
+	flex-direction: column;
 	margin: 2% 10%;
 	background-color: #f8f8f8;
 	padding: 2% 4%;
@@ -15,98 +17,70 @@ body {
 	height: 80vh;
 }
 
-.YourName {
-	font-size: 2vw;
-	margin-top: 20px;
+.menu {
+	display: flex;
+	justify-content: center;
 }
-
-.AmountOfTasks {
-	font-size: 1.2vw;
-	letter-spacing: 5px;
-	font-weight: 600;
-}
-
-.menu ul {
-	margin: 0px;
-	padding: 5px 0px 5px 30px;
-}
-.menu li {
-	display: inline;
-	margin-right: 20px;
-}
-#Account {
-	float: left;
-	width: 33%;
-}
-#TaskDo {
-	float: left;
-	width: 28%;
-	text-align: right;
-	font-size: 4vw;
-	color: darkslategray;
-	margin-top: 20px;
-}
-#Logout {
-	float: right;
-	width: 33%;
-	text-align: right;
-	font-size: 2vw;
-	color: #a306c2;
-	margin-right: 20px;
-	font-weight: bold;
+.button-click {
+	font-size: 28px;
+	border-radius: 50%;
+	text-align: center;
 	cursor: pointer;
+	color: #fff;
+	background-color: #a306c2;
+	width: 2.7vw;
+	height: 2.7vw;
+	border: none;
+}
+
+.button-click:active {
+	background-color: #7d0495;
+}
+
+.task-list {
 	margin-top: 50px;
 }
-.content {
-	margin-left: 15%;
-}
-.NewTask {
-	color: #a306c2;
-	font-size: 2vw;
-	margin-top: 200px;
-}
-.NewTask li {
-	display: inline;
-}
-.TaskList {
-	margin-top: 50px;
-}
-.TaskList li {
+.task-list li {
 	margin: 1% 0;
 }
+
 ul {
 	list-style: none;
 }
-.trash {
-	cursor: pointer;
+
+.add-new-task {
+	justify-content: flex-start;
+	flex-direction: row;
+	color: #a306c2;
+	font-size: 30px;
 }
+
 .tasks {
 	position: relative;
 	margin: 20px;
 	cursor: pointer;
-	font-size: 1.6vw;
+	font-size: 24px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
 }
 
-/* Hide the browser's default checkbox */
+.trash {
+	width: 28px;
+}
+
 .tasks input {
-	position: absolute;
 	opacity: 0;
 	cursor: pointer;
 	height: 0;
 	width: 0;
 }
-.tasks input:checked+.TaskName {
+
+.tasks input:checked+ .task-name {
 	text-decoration: line-through;
 }
-.TaskName {
-	margin: 0px 40px;
-}
 
-/* Create a custom checkbox */
 .checkmark {
 	position: absolute;
 	top: 0;
@@ -118,12 +92,10 @@ ul {
 	border-radius: 5px;
 }
 
-/*When the mouse is over a checkmark - the color changes*/
 .tasks:hover input~.checkmark {
 	background-color: rgb(235, 232, 255);
 }
 
-/*When a checkmark is cheked - the color changes*/
 .tasks input:checked~.checkmark {
 	background-color: #2196F3;
 }
@@ -131,19 +103,16 @@ ul {
 	text-decoration: line-through;
 }
 
-/* Create the checkmark*/
 .checkmark:after {
 	content: "";
 	position: absolute;
 	display: none;
 }
 
-/* Show the checkmark when task is checked */
 .tasks input:checked~.checkmark:after {
 	display: block;
 }
 
-/* Style the checkmark/indicator */
 .tasks .checkmark:after {
 	left: 7.5px;
 	top: 3px;
@@ -156,21 +125,59 @@ ul {
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
 }
-.addbtn {
-	font-size: 2vw;
-	border-radius: 70%;
-	text-align: center;
-	cursor: pointer;
-	color: #fff;
-	background-color: #a306c2;
-	width: 2.7vw;
-	height: 2.7vw;
-	border: none;
+.task-name {
+	margin: 40px;
 }
-.addbtn:active {
-	background-color: #7d0495;
-	animation: ;
+/* marquee */
+@-webkit-keyframes scroll {
+    0% {
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+    100% {
+        -webkit-transform: translate(-100%, 0);
+        transform: translate(-100%, 0);
+		opacity: 0.5;
+    }
 }
-.AmountOfTasks {
-	color: rgb(255, 84, 21);
+ 
+@-moz-keyframes scroll {
+    0% {
+        -moz-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+    100% {
+        -moz-transform: translate(-100%, 0);
+        transform: translate(-100%, 0);
+		opacity: 0.5;
+    }
+}
+ 
+@keyframes scroll {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-100%, 0);
+		opacity: 0.5;
+    }
+}
+ 
+.marquee {
+    display: block;
+	background-color: #eee;
+    width: 100%;
+	margin: auto;
+    white-space: nowrap;
+    overflow: hidden;
+	border-radius: 5px;
+	padding: 5px 0;
+}
+ 
+.marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    -webkit-animation: scroll 8s infinite linear;
+    -moz-animation: scroll 8s infinite linear;
+    animation: scroll 8s infinite linear;
 }
