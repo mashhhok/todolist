@@ -1,10 +1,12 @@
+"use strict";
+
 const addTaskButton = document.getElementById('addTask');
-const deskTaskInput = document.getElementById('taskInput');
+const lineTaskInput = document.getElementById('taskInput');
 const toDoList = document.getElementById('tasklist');
 const clearing = document.getElementById('clearAll');
 
 
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem("tasks")) ?? [];
 !localStorage.tasks ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks'));
 
 function Task(description) {
@@ -14,24 +16,45 @@ function Task(description) {
 
 let toDoElem = [];
 
-const createTask = (task, index) => {
-	return `<div class="task-item ">
-                  <button class="delete" onclick="deleteTask(${index})"><input type="image" class="trash" src="pics/trash.svg" name="delete" alt="delete"></button>
-                  <label class="tasks">
-                     <input type="checkbox" onclick="completeTask(${index})" class="complete" ${task.completed ? 'checked' : ''}>
-					 <span class="task-name ${task.completed ? 'done' : ''}">${task.description}</span>
-                     <span class="checkmark"></span>
-                  </label>
-               </div>
-			   `
-}
 
 
 const updateHTML = () => {
 		toDoList.innerHTML = "";
 		if(tasks.length > 0){
 			tasks.forEach((item, index) => {
-				toDoList.innerHTML += createTask(item, index);
+				let taskLine = document.createElement('li');
+	taskLine.classList.add("task-item");
+
+	let deleteButton = document.createElement('button');
+	deleteButton.classList.add("delete");
+	deleteButton.innerHTML = '<input type="image" class="trash" src="pics/trash.svg" name="delete" alt="delete">';
+	deleteButton.onclick = function() {deleteTask(index)}
+
+	let taskLabel = document.createElement('label');
+	taskLabel.classList.add("tasks");
+
+	let checkBoxComplete = document.createElement('input');
+	checkBoxComplete.classList.add("complete");
+	checkBoxComplete.type = 'checkbox'
+	checkBoxComplete.onclick = function() {completeTask(index)}
+
+	let taskName = document.createElement('span');
+	taskName.classList.add("task-name");
+	taskName.innerHTML = 'Lil Nas X'
+
+	let checkMark = document.createElement('span');
+	checkMark.classList.add("checkmark");
+
+
+	taskLabel.appendChild(checkBoxComplete);
+	taskLabel.appendChild(taskName);
+	taskLabel.appendChild(checkMark);
+
+	taskLine.appendChild(deleteButton);
+	taskLine.appendChild(taskLabel);
+
+	toDoList.appendChild(taskLine);
+	
 			})
 			toDoElem = document.querySelectorAll('.task-item'); 
 		}
@@ -55,10 +78,10 @@ const completeTask = index => {
 }
 
 addTaskButton.addEventListener('click', () => {
-	tasks.push(new Task(deskTaskInput.value));
+	tasks.push(new Task(lineTaskInput.value));
 	updateLocal();
 	updateHTML();
-	deskTaskInput.value = '';
+	lineTaskInput.value = '';
 });
 
 const deleteTask = index => {
