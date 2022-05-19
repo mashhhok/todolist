@@ -29,13 +29,16 @@ const updateHTML = () => {
 	let deleteButton = document.createElement('button');
 	deleteButton.classList.add("delete");
 	deleteButton.innerHTML = '<input type="image" class="trash" src="pics/trash.svg" name="delete" alt="delete">';
+
 	deleteButton.onclick = function() {deleteTask(index)};
+
 
 	let taskLabel = document.createElement('label');
 	taskLabel.classList.add("tasks");
 
 	let checkBoxComplete = document.createElement('input');
 	checkBoxComplete.classList.add("complete");
+
 	checkBoxComplete.type = 'checkbox';
 	checkBoxComplete.onclick = function() {completeTask(index)};
 
@@ -96,6 +99,7 @@ clearing.addEventListener("click", () => {
 	updateHTML();
 });
 
+
 document.querySelector('#taskInput').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
       tasks.push(new Task(lineTaskInput.value));
@@ -104,3 +108,4 @@ document.querySelector('#taskInput').addEventListener('keypress', function (e) {
 	lineTaskInput.value = '';
     }
 });
+
