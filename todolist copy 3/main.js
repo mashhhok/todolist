@@ -17,8 +17,6 @@ function Task(description) {
 
 let toDoElem = [];
 
-
-
 const updateHTML = () => {
 		toDoList.innerHTML = "";
 		if(tasks.length > 0){
