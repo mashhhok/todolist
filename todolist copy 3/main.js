@@ -17,6 +17,7 @@ function Task(description) {
 
 let toDoElem = [];
 
+
 const updateHTML = () => {
 		toDoList.innerHTML = "";
 		if(tasks.length > 0){
@@ -27,13 +28,19 @@ const updateHTML = () => {
 	let deleteButton = document.createElement('button');
 	deleteButton.classList.add("delete");
 	deleteButton.innerHTML = '<input type="image" class="trash" src="pics/trash.svg" name="delete" alt="delete">';
+
+	
 	deleteButton.onclick = function() {deleteTask(index)};
 
+
+	
 	let taskLabel = document.createElement('label');
 	taskLabel.classList.add("tasks");
 
 	let checkBoxComplete = document.createElement('input');
 	checkBoxComplete.classList.add("complete");
+
+	
 	checkBoxComplete.type = 'checkbox';
 	checkBoxComplete.onclick = function() {completeTask(index)};
 
