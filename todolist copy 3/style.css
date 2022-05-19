@@ -93,6 +93,7 @@ ul {
 .tasks input:checked~.checkmark {
 	background-color: #2196F3;
 }
+
 .checkmark:after {
 	content: "";
 	position: absolute;

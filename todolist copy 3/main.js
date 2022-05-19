@@ -44,7 +44,6 @@ const updateHTML = () => {
 	let checkMark = document.createElement('span');
 	checkMark.classList.add("checkmark");
 
-
 	taskLabel.appendChild(checkBoxComplete);
 	taskLabel.appendChild(taskName);
 	taskLabel.appendChild(checkMark);
