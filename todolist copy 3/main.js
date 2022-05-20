@@ -17,7 +17,7 @@ function Task(description) {
 let toDoElem = [];
 
 
-const updateHTML = () => {
+const updateList = () => {
     toDoList.innerHTML = "";
     if (tasks.length > 0) {
         tasks.forEach((item, index) => {
@@ -50,7 +50,7 @@ const updateHTML = () => {
 };
 
 
-updateHTML();
+updateList();
 const updateLocal = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
@@ -58,33 +58,33 @@ const updateLocal = () => {
 const completeTask = index => {
     tasks[index].completed = !tasks[index].completed;
     updateLocal();
-    updateHTML();
+    updateList();
 }
 
 addTaskButton.addEventListener('click', () => {
     tasks.push(new Task(lineTaskInput.value));
     updateLocal();
-    updateHTML();
+    updateList();
     lineTaskInput.value = '';
 });
 
 const deleteTask = index => {
     tasks.splice(index, 1);
     updateLocal();
-    updateHTML();
+    updateList();
 }
 
 clearing.addEventListener("click", () => {
     tasks = [];
     updateLocal();
-    updateHTML();
+    updateList();
 });
 
 document.querySelector('#taskInput').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
         tasks.push(new Task(lineTaskInput.value));
         updateLocal();
-        updateHTML();
+        updateList();
         lineTaskInput.value = '';
     }
 });
