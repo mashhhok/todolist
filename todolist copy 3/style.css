@@ -66,6 +66,7 @@ ul {
 
 .trash {
 	width: 28px;
+	cursor: pointer;
 }
 
 .tasks input {
@@ -141,7 +142,7 @@ ul {
 	font-size: 35px;
 	border-radius: 5px;
 }
-.tasklist {
+.task-list {
 	padding: 1vh 10%;
 	border: 1px solid #ddd;
 	border-radius: 10px;
