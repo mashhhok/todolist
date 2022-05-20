@@ -22,8 +22,8 @@ const updateList = () => {
     if (tasks.length > 0) {
         tasks.forEach((item, index) => {
             let taskLine = completedItem(item);
-			
-			let deleteButton = createButton(index, taskLine);
+            
+            let deleteButton = createButton(index, taskLine);
 
             let taskLabel = document.createElement('label');
             taskLabel.classList.add("tasks");
@@ -39,7 +39,7 @@ const updateList = () => {
             taskLabel.appendChild(taskName);
             taskLabel.appendChild(checkMark);
 
-			taskLine.appendChild(deleteButton);
+			      taskLine.appendChild(deleteButton);
             taskLine.appendChild(taskLabel);
 
             toDoList.appendChild(taskLine);
@@ -128,3 +128,4 @@ function createButton(index, taskLine) {
     taskLine.appendChild(deleteButton);
     return deleteButton;
 }
+
