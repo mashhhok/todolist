@@ -14,7 +14,7 @@ body {
 	background-color: #f8f8f8;
 	padding: 2% 4%;
 	border-radius: 20px;
-	height: 80vh;
+	min-height: 80vh;
 }
 
 .menu {
@@ -37,13 +37,6 @@ body {
 	background-color: #7d0495;
 }
 
-.task-list {
-	margin-top: 50px;
-}
-.task-list li {
-	margin: 1% 0;
-}
-
 ul {
 	list-style: none;
 }
@@ -53,6 +46,11 @@ ul {
 	flex-direction: row;
 	color: #a306c2;
 	font-size: 30px;
+	margin: 50px auto;
+	background-color: #f0f0f0;
+	padding: 30px 30px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
 }
 
 .tasks {
@@ -77,10 +75,6 @@ ul {
 	width: 0;
 }
 
-.tasks input:checked+ .task-name {
-	text-decoration: line-through;
-}
-
 .checkmark {
 	position: absolute;
 	top: 0;
@@ -98,9 +92,6 @@ ul {
 
 .tasks input:checked~.checkmark {
 	background-color: #2196F3;
-}
-.tasks:hover~.checkmark:after {
-	text-decoration: line-through;
 }
 
 .checkmark:after {
@@ -128,56 +119,46 @@ ul {
 .task-name {
 	margin: 40px;
 }
-/* marquee */
-@-webkit-keyframes scroll {
-    0% {
-        -webkit-transform: translate(0, 0);
-        transform: translate(0, 0);
-    }
-    100% {
-        -webkit-transform: translate(-100%, 0);
-        transform: translate(-100%, 0);
-		opacity: 0.5;
-    }
+
+.task-item {
+	margin: 2% 0;
 }
- 
-@-moz-keyframes scroll {
-    0% {
-        -moz-transform: translate(0, 0);
-        transform: translate(0, 0);
-    }
-    100% {
-        -moz-transform: translate(-100%, 0);
-        transform: translate(-100%, 0);
-		opacity: 0.5;
-    }
+
+.done  {
+	color: gray;
+	text-decoration: line-through;
 }
- 
-@keyframes scroll {
-    0% {
-        transform: translate(0, 0);
-    }
-    100% {
-        transform: translate(-100%, 0);
-		opacity: 0.5;
-    }
+
+.delete {
+	background-color: rgba(0, 0, 0, 0);
+	border: none;
 }
- 
-.marquee {
-    display: block;
-	background-color: #eee;
-    width: 100%;
-	margin: auto;
-    white-space: nowrap;
-    overflow: hidden;
+#taskInput {
+	border: none;
+	margin: 0 50px;
+	background-color: #fff;
+	border: solid 1px #eee;
+	font-size: 35px;
 	border-radius: 5px;
-	padding: 5px 0;
 }
- 
-.marquee span {
-    display: inline-block;
-    padding-left: 100%;
-    -webkit-animation: scroll 8s infinite linear;
-    -moz-animation: scroll 8s infinite linear;
-    animation: scroll 8s infinite linear;
+.tasklist {
+	padding: 1vh 10%;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	min-height: 450px;
+}
+
+#clearAll {
+	border: none;
+	background-color: gray;
+	color: #fff;
+	font-size: 25px;
+	padding: 10px 15px;
+	margin: 2% 0;
+	border-radius: 10px;
+	width: 30%;
+	margin: auto;
+	cursor: pointer	;
+	margin: 50px auto;
+	margin-top: 0;
 }
