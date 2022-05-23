@@ -1,131 +1,126 @@
-"use strict";
+'use strict'
 
-const addTaskButton = document.getElementById('addTask');
-const lineTaskInput = document.getElementById('taskInput');
-const toDoList = document.getElementById('task-list');
-const clearing = document.getElementById('clearAll');
-const checkBoxCover = document.getElementById('clearAll');
+const addTaskButton = document.getElementById('addTask')
+const lineTaskInput = document.getElementById('taskInput')
+const toDoList = document.getElementById('task-list')
+const clearing = document.getElementById('clearAll')
 
+let tasks = JSON.parse(localStorage.getItem('tasks')) ?? []
 
-let tasks = JSON.parse(localStorage.getItem("tasks")) ?? [];
-
-function Task(description) {
-    this.description = description;
-    this.completed = false
+function Task (description) {
+  this.description = description
+  this.completed = false
 }
 
-let toDoElem = [];
-
+// eslint-disable-next-line no-unused-vars
+let toDoElem = []
 
 const updateList = () => {
-    toDoList.innerHTML = "";
-    if (tasks.length > 0) {
-        tasks.forEach((item, index) => {
-            let taskLine = completedItem(item);
-            
-            let deleteButton = createButton(index, taskLine);
+  toDoList.innerHTML = ''
+  if (tasks.length > 0) {
+    tasks.forEach((item, index) => {
+      const taskLine = completedItem(item)
 
-            let taskLabel = document.createElement('label');
-            taskLabel.classList.add("tasks");
+      const deleteButton = createButton(index, taskLine)
 
-            let checkBoxComplete = tickCheckbox(item, index);
+      const taskLabel = document.createElement('label')
+      taskLabel.classList.add('tasks')
 
-            let taskName = createTask(item);
+      const checkBoxComplete = tickCheckbox(item, index)
 
-            let checkMark = document.createElement('span');
-            checkMark.classList.add("checkmark");
+      const taskName = createTask(item)
 
-            taskLabel.appendChild(checkBoxComplete);
-            taskLabel.appendChild(taskName);
-            taskLabel.appendChild(checkMark);
+      const checkMark = document.createElement('span')
+      checkMark.classList.add('checkmark')
 
-			      taskLine.appendChild(deleteButton);
-            taskLine.appendChild(taskLabel);
+      taskLabel.appendChild(checkBoxComplete)
+      taskLabel.appendChild(taskName)
+      taskLabel.appendChild(checkMark)
 
-            toDoList.appendChild(taskLine);
+      taskLine.appendChild(deleteButton)
+      taskLine.appendChild(taskLabel)
 
-        })
-        toDoElem = document.querySelectorAll('.task-item');
-    };
-};
+      toDoList.appendChild(taskLine)
+    })
+    toDoElem = document.querySelectorAll('.task-item')
+  };
+}
 
-
-updateList();
+export default updateList()
 const updateLocal = () => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('tasks', JSON.stringify(tasks))
 }
 
 const completeTask = index => {
-    tasks[index].completed = !tasks[index].completed;
-    updateLocal();
-    updateList();
+  tasks[index].completed = !tasks[index].completed
+  updateLocal()
+  updateList()
 }
 
 addTaskButton.addEventListener('click', () => {
-    tasks.push(new Task(lineTaskInput.value));
-    updateLocal();
-    updateList();
-    lineTaskInput.value = '';
-});
+  tasks.push(new Task(lineTaskInput.value))
+  updateLocal()
+  updateList()
+  lineTaskInput.value = ''
+})
 
 const deleteTask = index => {
-    tasks.splice(index, 1);
-    updateLocal();
-    updateList();
+  tasks.splice(index, 1)
+  updateLocal()
+  updateList()
 }
 
-clearing.addEventListener("click", () => {
-    tasks = [];
-    updateLocal();
-    updateList();
-});
+clearing.addEventListener('click', () => {
+  tasks = []
+  updateLocal()
+  updateList()
+})
 
-document.querySelector('#taskInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        tasks.push(new Task(lineTaskInput.value));
-        updateLocal();
-        updateList();
-        lineTaskInput.value = '';
-    }
-});
+document.querySelector('#taskInput').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    tasks.push(new Task(lineTaskInput.value))
+    updateLocal()
+    updateList()
+    lineTaskInput.value = ''
+  }
+})
 
-function completedItem(item) {
-    let taskLine = document.createElement('li');
-    taskLine.classList.add("task-item");
-    if (item.completed) {
-        taskLine.classList.add("done");
-    } else {
-        taskLine.classList.remove("done");
-    };
-    return taskLine;
+function completedItem (item) {
+  const taskLine = document.createElement('li')
+  taskLine.classList.add('task-item')
+  if (item.completed) {
+    taskLine.classList.add('done')
+  } else {
+    taskLine.classList.remove('done')
+  };
+  return taskLine
 }
 
-function createTask(item) {
-    let taskName = document.createElement('span');
-    taskName.classList.add("task-name");
-    taskName.innerHTML = item.description;
-    return taskName;
+function createTask (item) {
+  const taskName = document.createElement('span')
+  taskName.classList.add('task-name')
+  taskName.innerHTML = item.description
+  return taskName
 }
 
-function tickCheckbox(item, index) {
-    let checkBoxComplete = document.createElement('input');
-    checkBoxComplete.classList.add("complete");
-    checkBoxComplete.type = 'checkbox';
-    checkBoxComplete.checked = item.completed;
-    checkBoxComplete.addEventListener('click', function () {
-        completeTask(index);
-    });
-    return checkBoxComplete;
+function tickCheckbox (item, index) {
+  const checkBoxComplete = document.createElement('input')
+  checkBoxComplete.classList.add('complete')
+  checkBoxComplete.type = 'checkbox'
+  checkBoxComplete.checked = item.completed
+  checkBoxComplete.addEventListener('click', function () {
+    completeTask(index)
+  })
+  return checkBoxComplete
 }
 
-function createButton(index, taskLine) {
-    let deleteButton = document.createElement('button');
-    deleteButton.classList.add("delete");
-    deleteButton.innerHTML = '<img class="trash" src="pics/trash.svg" alt="delete">';
-    deleteButton.addEventListener('click', function () {
-        deleteTask(index);
-    });
-    taskLine.appendChild(deleteButton);
-    return deleteButton;
+function createButton (index, taskLine) {
+  const deleteButton = document.createElement('button')
+  deleteButton.classList.add('delete')
+  deleteButton.innerHTML = '<img class="trash" src="pics/trash.svg" alt="delete">'
+  deleteButton.addEventListener('click', function () {
+    deleteTask(index)
+  })
+  taskLine.appendChild(deleteButton)
+  return deleteButton
 }
-
