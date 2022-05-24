@@ -163,3 +163,7 @@ ul {
 	margin: 50px auto;
 	margin-top: 0;
 }
+
+.hidden {
+	display: none;
+}

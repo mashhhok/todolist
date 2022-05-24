@@ -12,11 +12,15 @@ function Task (description) {
   this.completed = false
 }
 
+tasks.sort(function (a, b) { return a.completed - b.completed })
+console.log(tasks)
+
 // eslint-disable-next-line no-unused-vars
 let toDoElem = []
 
 const updateList = () => {
   toDoList.innerHTML = ''
+
   if (tasks.length > 0) {
     tasks.forEach((item, index) => {
       const taskLine = completedItem(item)
@@ -46,9 +50,11 @@ const updateList = () => {
   };
 }
 
-export default updateList()
 const updateLocal = () => {
   localStorage.setItem('tasks', JSON.stringify(tasks))
+  tasks.sort(function (a, b) {
+    return a.completed - b.completed
+  })
 }
 
 const completeTask = index => {
@@ -124,3 +130,5 @@ function createButton (index, taskLine) {
   taskLine.appendChild(deleteButton)
   return deleteButton
 }
+
+updateList()
