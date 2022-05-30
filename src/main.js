@@ -131,5 +131,4 @@ function createDeleteButton () {
 
   return button
 }
-
 updateList()
